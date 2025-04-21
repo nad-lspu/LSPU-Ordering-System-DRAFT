@@ -1,0 +1,25 @@
+<Menu>:
+    name: "menu_screen"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Menu"
+            left_action_items: [["arrow-left", lambda x: app.change_screen("user_dashboard")]]
+
+        ScrollView:
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                padding: "10dp"
+
+                MDRaisedButton:
+                    text: "Item 1"
+                    on_release: root.add_to_cart("Item 1")
+
+                MDRaisedButton:
+                    text: "Item 2"
+                    on_release: root.add_to_cart("Item 2")
+
+                # More menu items here...

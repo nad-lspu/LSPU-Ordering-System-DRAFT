@@ -1,0 +1,53 @@
+<LoginScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        padding: "40dp"
+        pos_hint: {"center_y": 0.5}
+        size_hint_y: None
+        height: self.minimum_height
+
+        Image:
+            source: "assets/logo.png"
+            size_hint: None, None
+            size: "1000dp", "170dp"
+            allow_stretch: True
+            keep_ratio: True
+            pos_hint: {"center_x": 0.5, "top": 0.95}
+
+
+        MDTextField:
+            id: login_email
+            hint_text: "Email"
+            icon_right: "email"
+            size_hint_x: None
+            width: 300
+            pos_hint: {"center_x": 0.5}
+
+        MDTextField:
+            id: login_password
+            hint_text: "Password"
+            icon_right: "lock"
+            password: True
+            size_hint_x: None
+            width: 300
+            pos_hint: {"center_x": 0.5}
+
+        MDRaisedButton:
+            text: "Login"
+            pos_hint: {"center_x": 0.5}
+            on_release: root.login_user()
+
+        MDTextButton:
+            text: "Don't have an account? [b]Register here[/b]"
+            markup: True
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "register"
+
+        MDTextButton:
+            text: "[b]Forgot Password?[/b]"
+            markup: True
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
+            pos_hint: {"center_x": 0.5}
+            on_release: root.forgot_password()

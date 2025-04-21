@@ -1,0 +1,25 @@
+<Orders>:
+    name: "orders_screen"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "My Orders"
+            left_action_items: [["arrow-left", lambda x: app.change_screen("user_dashboard")]]
+
+        ScrollView:
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                padding: "10dp"
+
+                MDRaisedButton:
+                    text: "Order 1"
+                    on_release: root.view_order("Order 1")
+
+                MDRaisedButton:
+                    text: "Order 2"
+                    on_release: root.view_order("Order 2")
+
+                # More orders here...

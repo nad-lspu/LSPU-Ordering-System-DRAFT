@@ -1,0 +1,60 @@
+<RegisterScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        padding: "40dp"
+        pos_hint: {"center_y": 0.5}
+        size_hint_y: None
+        height: self.minimum_height
+
+        MDLabel:
+            text: "Registration"
+            halign: "center"
+            font_style: "H4"
+            font_name: "assets/fonts/Poppins-Bold.ttf"
+
+        MDTextField:
+            id: reg_name
+            hint_text: "Full Name"
+            icon_right: "account"
+            size_hint_x: None
+            width: 300
+            pos_hint: {"center_x": 0.5}
+
+        MDTextField:
+            id: reg_role
+            hint_text: "Select Role"
+            icon_right: "account-tie"
+            readonly: True
+            on_focus: if self.focus: root.open_role_menu()
+            size_hint_x: None
+            width: 300
+            pos_hint: {"center_x": 0.5}
+
+        MDTextField:
+            id: reg_email
+            hint_text: "Email"
+            icon_right: "email"
+            size_hint_x: None
+            width: 300
+            pos_hint: {"center_x": 0.5}
+
+        MDTextField:
+            id: reg_password
+            hint_text: "Password"
+            icon_right: "lock"
+            password: True
+            size_hint_x: None
+            width: 300
+            pos_hint: {"center_x": 0.5}
+
+        MDRaisedButton:
+            text: "Register"
+            pos_hint: {"center_x": 0.5}
+            on_release: root.register_user()
+
+        MDTextButton:
+            text: "Already have an account? [b]Login[/b]"
+            markup: True
+            pos_hint: {"center_x": 0.5}
+            on_release: app.root.current = "login"

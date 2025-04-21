@@ -1,0 +1,24 @@
+<UserDashboard>:
+    name: "user_dashboard"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "User Dashboard"
+            right_action_items: [["logout", lambda x: app.logout()]]
+
+        MDLabel:
+            text: "Welcome, User!"
+            halign: "center"
+            font_style: "H5"
+
+        MDRaisedButton:
+            text: "Browse Menu"
+            pos_hint: {"center_x": 0.5}
+            on_release: root.go_to_menu()
+
+        MDRaisedButton:
+            text: "My Orders"
+            pos_hint: {"center_x": 0.5}
+            on_release: root.go_to_my_orders()
