@@ -1,3 +1,4 @@
+import json
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.menu import MDDropdownMenu
 from kivy.metrics import dp
@@ -17,7 +18,8 @@ class RegisterScreen(Screen):
                 {"text": "Admin", "on_release": lambda x="Admin": self.set_role(x)},
             ],
             width_mult=3,
-            max_height=dp(112)
+            max_height=dp(112),
+            position = "auto"
         )
 
     def open_role_menu(self):
@@ -41,18 +43,25 @@ class RegisterScreen(Screen):
             field.helper_text = ""
             field.helper_text_mode = "on_error"
 
-        if len(password.text) < 6:
-            password.error = True
-            password.helper_text = "Password must be at least 6 characters"
+        if not name.text:
+            name.error = True
+            name.helper_text = "Please enter your name"
+
+        if not role.text:
+            role.error = True
+            role.helper_text = "Please select a role"
+
+        if not name.text or not role.text:
             return
 
         if "@" not in email.text or "." not in email.text:
             email.error = True
-            email.helper_text = "Invalid email format"
+            email.helper_text = "Invalid email"
             return
 
-        if not name.text or not role.text:
-            toast("All fields are required.")
+        if len(password.text) < 6:
+            password.error = True
+            password.helper_text = "Must be at least 6 characters"
             return
 
         try:
@@ -68,12 +77,19 @@ class RegisterScreen(Screen):
 
             # auth.send_email_verification(user['idToken'])
             # toast("Verification email sent. Please check your inbox.")
+
         except Exception as e:
-            print(e)
-            email.error = True
-            email.helper_text = "Email already exists or invalid"
+            error_json = e.args[1]
+            error = json.loads(error_json)['error']['message']
+            print(f"Registration error: {error}")
+            toast("Registration failed: " + error.replace("_", " ").capitalize())
 
     def toggle_password_visibility(self, field):
         field.password = not field.password
-        field.icon_right = "eye" if not field.password else "eye-off"
+        icon = "eye" if not field.password else "eye-off"
+        # Sync the icon button manually
+        for child in field.parent.children:
+            if hasattr(child, 'icon'):
+                child.icon = icon
+
 

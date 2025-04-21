@@ -10,12 +10,14 @@ from screens.orders_screen import Orders
 from screens.menu_management_screen import MenuManagement
 
 class GrabPiyudApp(MDApp):
+    admin_name = "Admin"
+
     def build(self):
         self.title = "Grab Piyu-d"
         self.theme_cls.primary_palette = "Green"
 
-        Builder.load_file("kv/login.kv")
-        Builder.load_file("kv/register.kv")
+        Builder.load_file("kv/login_screen.kv")
+        Builder.load_file("kv/register_screen.kv")
         Builder.load_file("kv/user_dashboard.kv")
         Builder.load_file("kv/admin_dashboard.kv")
         Builder.load_file("kv/menu_screen.kv")
@@ -24,20 +26,20 @@ class GrabPiyudApp(MDApp):
 
 
         sm = ScreenManager(transition=SwapTransition())
-        sm.add_widget(LoginScreen(name="login"))
-        sm.add_widget(RegisterScreen(name="register"))
+        sm.add_widget(LoginScreen(name="login_screen"))
+        sm.add_widget(RegisterScreen(name="register_screen"))
         sm.add_widget(UserDashboard(name="user_dashboard"))
         sm.add_widget(AdminDashboard(name="admin_dashboard"))
         sm.add_widget(Menu(name="menu_screen"))
         sm.add_widget(Orders(name="orders_screen"))
         sm.add_widget(MenuManagement(name="menu_management_screen"))
 
-        sm.current = "admin_dashboard"
+        # sm.current = "admin_dashboard"
 
         return sm
 
     def logout(self):
-        self.root.current = "login"
+        self.root.current = "login_screen"
 
 
 GrabPiyudApp().run()

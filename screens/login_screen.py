@@ -1,6 +1,8 @@
 from kivy.uix.screenmanager import Screen
 from firebase_config import auth, db
 from kivymd.toast import toast
+from kivymd.app import MDApp
+from kivy.uix.screenmanager import SwapTransition
 
 class LoginScreen(Screen):
     def login_user(self):
@@ -16,7 +18,7 @@ class LoginScreen(Screen):
             return
         if len(password.text) < 6:
             password.error = True
-            password.helper_text = "Password too short"
+            password.helper_text = "Must be at least 6 characters"
             return
 
         try:
@@ -31,17 +33,27 @@ class LoginScreen(Screen):
 
             if user_data:
                 role = user_data.get("role")
-                if role == "Admin":
+                name = user_data.get("name", "Admin")
+
+                app = MDApp.get_running_app()
+                app.admin_name = name  # Save admin name globally
+
+                self.manager.transition = SwapTransition()
+
+                if role.lower() == "admin":
                     self.manager.current = "admin_dashboard"
                 else:
                     self.manager.current = "user_dashboard"
             else:
                 toast("User data not found.")
-        except:
+
+        except Exception as e:
+            print(f"Login error: {e}")
             email.error = True
             password.error = True
-            email.helper_text = "Wrong credentials"
-            password.helper_text = "Wrong credentials"
+            email.helper_text = "Wrong email or password"
+            password.helper_text = "Wrong email or password"
+
 
     def forgot_password(self):
         from kivymd.toast import toast
@@ -60,5 +72,9 @@ class LoginScreen(Screen):
             print(e)
             self.ids.login_email.error = True
             self.ids.login_email.helper_text = "Failed to send reset email"
+
+    def toggle_password_visibility(self, field):
+        field.password = not field.password
+        field.icon_right = "eye" if not field.password else "eye-off"
 
 

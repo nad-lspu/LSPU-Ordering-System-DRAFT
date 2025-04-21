@@ -17,9 +17,10 @@
             id: reg_name
             hint_text: "Full Name"
             icon_right: "account"
-            size_hint_x: None
-            width: 300
+            size_hint_x: 0.8
+            max_width: 350
             pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
 
         MDTextField:
             id: reg_role
@@ -27,26 +28,30 @@
             icon_right: "account-tie"
             readonly: True
             on_focus: if self.focus: root.open_role_menu()
-            size_hint_x: None
-            width: 300
+            size_hint_x: 0.8
+            max_width: 350
             pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
 
         MDTextField:
             id: reg_email
             hint_text: "Email"
             icon_right: "email"
-            size_hint_x: None
-            width: 300
+            size_hint_x: 0.8
+            max_width: 350
             pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
 
         MDTextField:
             id: reg_password
             hint_text: "Password"
             icon_right: "lock"
             password: True
-            size_hint_x: None
-            width: 300
+            size_hint_x: 0.8
+            max_width: 350
             pos_hint: {"center_x": 0.5}
+            on_icon_right: root.toggle_password_visibility(self)
+            helper_text_mode: "on_error"
 
         MDRaisedButton:
             text: "Register"
@@ -57,4 +62,4 @@
             text: "Already have an account? [b]Login[/b]"
             markup: True
             pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "login"
+            on_release: app.root.current = "login_screen"

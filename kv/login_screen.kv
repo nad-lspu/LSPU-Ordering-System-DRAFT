@@ -10,28 +10,28 @@
         Image:
             source: "assets/logo.png"
             size_hint: None, None
-            size: "1000dp", "170dp"
+            size: "500dp", "180dp"
             allow_stretch: True
             keep_ratio: True
             pos_hint: {"center_x": 0.5, "top": 0.95}
-
 
         MDTextField:
             id: login_email
             hint_text: "Email"
             icon_right: "email"
-            size_hint_x: None
-            width: 300
+            size_hint_x: 0.8
             pos_hint: {"center_x": 0.5}
+            helper_text_mode: "on_error"
 
         MDTextField:
             id: login_password
             hint_text: "Password"
             icon_right: "lock"
             password: True
-            size_hint_x: None
-            width: 300
+            size_hint_x: 0.8
             pos_hint: {"center_x": 0.5}
+            on_icon_right: root.toggle_password_visibility(self)
+            helper_text_mode: "on_error"
 
         MDRaisedButton:
             text: "Login"
@@ -42,7 +42,7 @@
             text: "Don't have an account? [b]Register here[/b]"
             markup: True
             pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "register"
+            on_release: app.root.current = "register_screen"
 
         MDTextButton:
             text: "[b]Forgot Password?[/b]"
