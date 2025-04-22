@@ -1,17 +1,51 @@
 <MenuManagement>:
-    name: "menu_management_screen"
-
     MDBoxLayout:
         orientation: "vertical"
+        spacing: "0dp"
+        padding: "0dp"
 
         MDTopAppBar:
-            title: "Menu Management"
-            left_action_items: [["arrow-left", lambda x: app.change_screen("admin_dashboard")]]
+            title: "Manage Menu"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: setattr(app.root, "current", "admin_dashboard")]]
+            md_bg_color: app.theme_cls.primary_color
 
-        MDRaisedButton:
-            text: "Add New Item"
-            on_release: root.add_new_item()
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: "10dp"
+                padding: "10dp"
 
-        MDRaisedButton:
-            text: "Edit Item"
-            on_release: root.edit_item()
+                MDLabel:
+                    id: no_items_label
+                    text: "No menu items available"
+                    halign: "center"
+                    theme_text_color: "Hint"
+                    font_style: "H6"
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(20)
+                    opacity: 0
+
+                GridLayout:
+                    id: menu_list
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: "10dp"
+                    cols: 2
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "10dp"
+            padding: "10dp"
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDRaisedButton:
+                text: "Add Item"
+                on_release: root.add_menu_item()
+
+            MDRaisedButton:
+                text: "Save Menu"
+                on_release: root.save_menu()

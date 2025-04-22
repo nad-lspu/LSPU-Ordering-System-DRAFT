@@ -10,11 +10,12 @@
         MDLabel:
             text: "Registration"
             halign: "center"
-            font_style: "H4"
-            font_name: "assets/fonts/Poppins-Bold.ttf"
+            font_style: "H3"
+            font_name: "assets/fonts/Churchward Lorina Bold.ttf"
 
         MDTextField:
             id: reg_name
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             hint_text: "Full Name"
             icon_right: "account"
             size_hint_x: 0.8
@@ -24,6 +25,7 @@
 
         MDTextField:
             id: reg_role
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             hint_text: "Select Role"
             icon_right: "account-tie"
             readonly: True
@@ -35,6 +37,7 @@
 
         MDTextField:
             id: reg_email
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             hint_text: "Email"
             icon_right: "email"
             size_hint_x: 0.8
@@ -55,11 +58,13 @@
 
         MDRaisedButton:
             text: "Register"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             pos_hint: {"center_x": 0.5}
             on_release: root.register_user()
 
         MDTextButton:
             text: "Already have an account? [b]Login[/b]"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             markup: True
             pos_hint: {"center_x": 0.5}
             on_release: app.root.current = "login_screen"

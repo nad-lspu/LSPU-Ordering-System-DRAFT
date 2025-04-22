@@ -4,7 +4,6 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivy.metrics import dp
 from firebase_config import auth, db
 from kivymd.toast import toast
-from kivy.utils import get_color_from_hex
 
 class RegisterScreen(Screen):
     def on_pre_enter(self):
@@ -37,7 +36,6 @@ class RegisterScreen(Screen):
         email = self.ids.reg_email
         password = self.ids.reg_password
 
-        # Reset text colors
         for field in [name, role, email, password]:
             field.error = False
             field.helper_text = ""
@@ -73,7 +71,7 @@ class RegisterScreen(Screen):
                 "email": email.text
             })
             toast("Registered successfully!")
-            self.manager.current = "login"
+            self.manager.current = "login_screen"
 
             # auth.send_email_verification(user['idToken'])
             # toast("Verification email sent. Please check your inbox.")
@@ -86,10 +84,6 @@ class RegisterScreen(Screen):
 
     def toggle_password_visibility(self, field):
         field.password = not field.password
-        icon = "eye" if not field.password else "eye-off"
-        # Sync the icon button manually
-        for child in field.parent.children:
-            if hasattr(child, 'icon'):
-                child.icon = icon
+        field.icon_right = "eye" if not field.password else "eye-off"
 
 

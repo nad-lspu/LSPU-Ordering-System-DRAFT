@@ -36,7 +36,7 @@ class LoginScreen(Screen):
                 name = user_data.get("name", "Admin")
 
                 app = MDApp.get_running_app()
-                app.admin_name = name  # Save admin name globally
+                app.admin_name = name
 
                 self.manager.transition = SwapTransition()
 

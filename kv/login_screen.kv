@@ -8,7 +8,7 @@
         height: self.minimum_height
 
         Image:
-            source: "assets/logo.png"
+            source: "assets/GrabPiyudLong_g.png"
             size_hint: None, None
             size: "500dp", "180dp"
             allow_stretch: True
@@ -17,6 +17,7 @@
 
         MDTextField:
             id: login_email
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             hint_text: "Email"
             icon_right: "email"
             size_hint_x: 0.8
@@ -35,17 +36,20 @@
 
         MDRaisedButton:
             text: "Login"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             pos_hint: {"center_x": 0.5}
             on_release: root.login_user()
 
         MDTextButton:
             text: "Don't have an account? [b]Register here[/b]"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             markup: True
             pos_hint: {"center_x": 0.5}
             on_release: app.root.current = "register_screen"
 
         MDTextButton:
             text: "[b]Forgot Password?[/b]"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
             markup: True
             theme_text_color: "Custom"
             text_color: app.theme_cls.primary_color

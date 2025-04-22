@@ -13,6 +13,7 @@ class GrabPiyudApp(MDApp):
     admin_name = "Admin"
 
     def build(self):
+        self.icon = "assets/GrabPiyud_gbg256circle.png"
         self.title = "Grab Piyu-d"
         self.theme_cls.primary_palette = "Green"
 
@@ -34,12 +35,11 @@ class GrabPiyudApp(MDApp):
         sm.add_widget(Orders(name="orders_screen"))
         sm.add_widget(MenuManagement(name="menu_management_screen"))
 
-        # sm.current = "admin_dashboard"
+        sm.current = "admin_dashboard"
 
         return sm
 
     def logout(self):
         self.root.current = "login_screen"
-
 
 GrabPiyudApp().run()

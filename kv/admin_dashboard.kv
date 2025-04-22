@@ -2,34 +2,99 @@
     name: "admin_dashboard"
 
     MDBoxLayout:
-        orientation: 'vertical'
+        orientation: "vertical"
 
+        # Admin Panel
         MDTopAppBar:
-            title: "Grab Piyu-d | " + app.admin_name
-            right_action_items: [["logout", lambda x: app.logout()]]
-            elevation: 10
+            title: "Admin Dashboard"
+            elevation: 4
+            md_bg_color: app.theme_cls.primary_color
+            right_action_items: [["logout", lambda x: setattr(app.root, "current", "login_screen")]]
 
-        MDBoxLayout:
-            orientation: "vertical"
-            padding: "20dp"
-            spacing: "15dp"
+        MDNavigationLayout:
+            MDScreenManager:
+                id: screen_manager
 
-            MDLabel:
-                text: f"Welcome, {app.admin_name}"
-                font_style: "H5"
-                halign: "center"
 
-            MDRaisedButton:
-                text: "Manage Menu"
-                pos_hint: {"center_x": 0.5}
-                on_release: root.manager.current = "manage_menu"
+                MDScreen:
+                    name: "home"
 
-            MDRaisedButton:
-                text: "View Orders"
-                pos_hint: {"center_x": 0.5}
-                on_release: root.manager.current = "view_orders"
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: "10dp"
+                        spacing: "20dp"
 
-            MDRaisedButton:
-                text: "View Analytics"
-                pos_hint: {"center_x": 0.5}
-                on_release: root.manager.current = "analytics"
+                        MDLabel:
+                            text: "Welcome, " + app.admin_name + "!"
+                            halign: "center"
+                            font_style: "H5"
+                            font_name: "assets/fonts/Churchward Lorina Bold.ttf"
+                            font_size: "30sp"
+
+                        # Centered GridLayout for Boxes
+                        GridLayout:
+                            cols: 2
+                            spacing: "100dp"
+                            padding: "5dp"
+                            size_hint_x: None
+                            width: self.minimum_width
+                            height: self.minimum_height
+                            pos_hint: {"center_x": 0.5}
+
+                            # Manage Orders Box
+                            MDCard:
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: "250dp", "200dp"
+                                radius: [12]
+                                elevation: 2
+                                md_bg_color: app.theme_cls.primary_light
+                                on_release: app.root.current = "orders_screen"
+                                pos_hint: {"center_x": 0.5}
+
+                                BoxLayout:
+                                    orientation: "vertical"
+                                    spacing: "15dp"
+                                    padding: "10dp"
+
+                                    MDIcon:
+                                        icon: "clipboard-list"
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "center"
+                                        font_size: "60sp"
+
+                                    MDLabel:
+                                        text: "Manage Orders"
+                                        halign: "center"
+                                        font_name: "assets/fonts/RigSolid-BoldReverse.ttf"
+                                        font_size: "40dp"
+
+                            # Manage Menu Box
+                            MDCard:
+                                orientation: "vertical"
+                                size_hint: None, None
+                                size: "250dp", "200dp"
+                                radius: [12]
+                                elevation: 2  # Adjust shadow intensity
+                                md_bg_color: get_color_from_hex("#4CAF50")
+                                on_release: app.root.current = "menu_management_screen"
+                                pos_hint: {"center_x": 0.5}
+
+                                BoxLayout:
+                                    orientation: "vertical"
+                                    spacing: "15dp"
+                                    padding: "10dp"
+
+                                    MDIcon:
+                                        icon: "silverware-fork-knife"
+                                        theme_text_color: "Custom"
+                                        text_color: [1, 1, 1, 1]
+                                        halign: "center"
+                                        font_size: "60sp"
+
+                                    MDLabel:
+                                        text: "Manage Menu"
+                                        halign: "center"
+                                        font_name: "assets/fonts/RigSolid-BoldReverse.ttf"
+                                        font_size: "40dp"
