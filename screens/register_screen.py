@@ -73,8 +73,8 @@ class RegisterScreen(Screen):
             toast("Registered successfully!")
             self.manager.current = "login_screen"
 
-            # auth.send_email_verification(user['idToken'])
-            # toast("Verification email sent. Please check your inbox.")
+            auth.send_email_verification(user['idToken'])
+            toast("Verification email sent. Please check your inbox.")
 
         except Exception as e:
             error_json = e.args[1]
