@@ -84,6 +84,4 @@ class RegisterScreen(Screen):
 
     def toggle_password_visibility(self, field):
         field.password = not field.password
-        field.icon_right = "eye" if not field.password else "eye-off"
-
-
+        self.ids.show_password_button.text = "[b]Hide Password[/b]" if not field.password else "[b]Show Password[/b]"

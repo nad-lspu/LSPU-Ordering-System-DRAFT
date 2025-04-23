@@ -75,6 +75,3 @@ class LoginScreen(Screen):
 
     def toggle_password_visibility(self, field):
         field.password = not field.password
-        field.icon_right = "eye" if not field.password else "eye-off"
-
-

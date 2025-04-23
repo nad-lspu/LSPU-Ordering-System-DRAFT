@@ -23,35 +23,67 @@
             size_hint_x: 0.8
             pos_hint: {"center_x": 0.5}
             helper_text_mode: "on_error"
+            size_hint_y: None
+            height: "48dp"
 
-        MDTextField:
-            id: login_password
-            hint_text: "Password"
-            icon_right: "lock"
-            password: True
+        MDBoxLayout:
+            orientation: "vertical"
             size_hint_x: 0.8
+            size_hint_y: None
+            height: password_container.height + show_password_button.height + dp(5)
             pos_hint: {"center_x": 0.5}
-            on_icon_right: root.toggle_password_visibility(self)
-            helper_text_mode: "on_error"
+            spacing: "5dp"
+
+            MDBoxLayout:
+                id: password_container
+                size_hint_y: None
+                height: "48dp"
+
+                MDTextField:
+                    id: login_password
+                    hint_text: "Password"
+                    icon_right: "lock"
+                    password: True
+                    helper_text_mode: "on_error"
+                    size_hint_y: None
+                    height: "48dp"
+
+            MDTextButton:
+                id: show_password_button
+                text: "[b]Show Password[/b]" if login_password.password else "[b]Hide Password[/b]"
+                font_name: "assets/fonts/NotoSansKhmer.ttf"
+                markup: True
+                halign: "left"
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.primary_color
+                size_hint_y: None
+                height: self.texture_size[1]
+                on_release: root.toggle_password_visibility(login_password)
 
         MDRaisedButton:
             text: "Login"
             font_name: "assets/fonts/NotoSansKhmer.ttf"
             pos_hint: {"center_x": 0.5}
             on_release: root.login_user()
+            size_hint_y: None
+            height: "48dp"
 
         MDTextButton:
-            text: "Don't have an account? [b]Register here[/b]"
+            text: "Don't have an account? [u]Register here[/u]"
             font_name: "assets/fonts/NotoSansKhmer.ttf"
             markup: True
             pos_hint: {"center_x": 0.5}
+            size_hint_y: None
+            height: self.texture_size[1]
             on_release: app.root.current = "register_screen"
 
         MDTextButton:
-            text: "[b]Forgot Password?[/b]"
-            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            text: "Forgot Password?"
+            font_name: "assets/fonts/NotoSansKhmer-Bold.ttf"
             markup: True
             theme_text_color: "Custom"
             text_color: app.theme_cls.primary_color
             pos_hint: {"center_x": 0.5}
+            size_hint_y: None
+            height: self.texture_size[1]
             on_release: root.forgot_password()

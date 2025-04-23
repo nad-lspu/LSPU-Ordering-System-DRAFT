@@ -1,37 +1,90 @@
-from kivy.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
-from kivy.uix.button import Button
+from kivymd.uix.screen import MDScreen
+from kivymd.uix.textfield import MDTextField
+from kivymd.uix.button import MDIconButton
+from kivy.metrics import dp
+from kivy.properties import BooleanProperty
+from kivy.uix.boxlayout import BoxLayout
+from kivy.lang import Builder
 
-from screens.admin_dashboard import AdminDashboard
-from screens.user_dashboard import UserDashboard
-from screens.menu_screen import Menu
-from screens.orders_screen import Orders
-from screens.menu_management_screen import MenuManagement
+KV = '''
+<PasswordTextField>:
+    size_hint_y: None
+    height: password_field.height
 
-class GrabPiyudApp(MDApp):
+    MDTextField:
+        id: password_field
+        hint_text: "Password"
+        password: True
+        helper_text: "Enter your password"
+        helper_text_mode: "on_focus"
+        pos_hint: {"center_y": .5}
+        size_hint_x: 1
+        password: root.password_hidden
+
+    MDIconButton:
+        icon: "eye-off" if root.password_hidden else "eye"
+        pos_hint: {"center_y": .5}
+        pos: password_field.width - self.width + dp(8), 0
+        theme_text_color: "Hint"
+        on_release: root.toggle_password_visibility()
+
+PasswordScreen:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(20)
+
+        MDLabel:
+            text: "Login"
+            font_style: "H4"
+            size_hint_y: None
+            height: dp(50)
+            halign: "center"
+
+        Widget:
+            size_hint_y: 0.3
+
+        MDTextField:
+            hint_text: "Username"
+            icon_right: "account"
+            size_hint_x: None
+            width: "300dp"
+            pos_hint: {"center_x": .5}
+
+        PasswordTextField:
+            id: password_field
+            size_hint_x: None
+            width: "300dp"
+            pos_hint: {"center_x": .5}
+
+        Widget:
+            size_hint_y: 0.3
+
+        MDRaisedButton:
+            text: "LOGIN"
+            pos_hint: {"center_x": .5}
+            size_hint_x: None
+            width: "200dp"
+'''
+
+class PasswordTextField(BoxLayout):
+    password_hidden = BooleanProperty(True)
+
+    def toggle_password_visibility(self):
+        self.password_hidden = not self.password_hidden
+
+
+class PasswordScreen(MDScreen):
+    pass
+
+
+class PasswordApp(MDApp):
     def build(self):
-        self.screen_manager = ScreenManager()
+        self.theme_cls.primary_palette = "Blue"
+        self.theme_cls.theme_style = "Light"
+        return Builder.load_string(KV)
 
-        # Add screens for user and admin
-        self.screen_manager.add_widget(AdminDashboard(name="admin_dashboard"))
-        self.screen_manager.add_widget(UserDashboard(name="user_dashboard"))
-        self.screen_manager.add_widget(Menu(name="menu_screen"))
-        self.screen_manager.add_widget(Orders(name="orders_screen"))
-        self.screen_manager.add_widget(MenuManagement(name="menu_management_screen"))
 
-        # Set flag for testing (change between "user" or "admin" for testing)
-        self.testing_role = "admin"  # "user" or "admin"
-
-        if self.testing_role == "admin":
-            self.change_screen("admin_dashboard")
-        elif self.testing_role == "user":
-            self.change_screen("user_dashboard")
-
-        return self.screen_manager
-
-    def change_screen(self, screen_name):
-        self.screen_manager.current = screen_name
-
-    def logout(self):
-        self.change_screen("login_screen")  # Redirect to login if needed
-
+if __name__ == "__main__":
+    PasswordApp().run()
