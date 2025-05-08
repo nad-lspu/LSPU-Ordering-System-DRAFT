@@ -115,13 +115,11 @@ class MenuManagement(Screen):
             name = card.name_field.text.strip()
             price_text = card.price_field.text.replace("₱", "").strip()
 
-            # Validation
             if not name:
                 card.name_field.error = True
                 card.name_field.helper_text = "Item name is required"
                 has_error = True
 
-            # Validate price
             try:
                 price = float(price_text)
             except ValueError:

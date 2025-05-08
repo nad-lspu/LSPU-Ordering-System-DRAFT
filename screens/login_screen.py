@@ -26,6 +26,7 @@ class LoginScreen(Screen):
             uid = user['localId']
             user_data = db.child("users").child(uid).get().val()
 
+            # Email verification check
             # user_info = auth.get_account_info(user['idToken'])
             # if not user_info['users'][0]['emailVerified']:
             #     toast("Please verify your email first.")
@@ -54,10 +55,7 @@ class LoginScreen(Screen):
             email.helper_text = "Wrong email or password"
             password.helper_text = "Wrong email or password"
 
-
     def forgot_password(self):
-        from kivymd.toast import toast
-
         email = self.ids.login_email.text
 
         if not email or "@" not in email:

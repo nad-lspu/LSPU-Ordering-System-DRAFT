@@ -1,40 +1,73 @@
-<UserDashboard>:
-    name: "user_dashboard"
+<UserDashboard>
     MDFloatLayout:
+        md_bg_color: app.theme_cls.primary_color
 
-        MDLabel:
-            text: "Welcome, User!"
-            halign: "center"
-            font_style: "H4"
-            font_name: "assets/fonts/NotoSansKhmer.ttf"
-            pos_hint: {"center_x": 0.5, "top": 0.95}
-            size_hint_y: None
-            height: self.texture_size[1]
+        MDCard:
+            size_hint: 0.92, 0.85
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            elevation: 12
+            padding: dp(20)
+            orientation: "vertical"
+            spacing: dp(20)
+            radius: [20, 20, 20, 20]
 
-        MDRaisedButton:
-            text: "Browse Menu"
-            font_name: "assets/fonts/NotoSansKhmer.ttf"
-            pos_hint: {"center_x": 0.5, "center_y": 0.6}
-            size_hint: None, None
-            size: dp(200), dp(48)
-            on_release:
-                app.root.current = "menu_screen"
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+                pos_hint: {"center_x": 0.5}
 
-        MDRaisedButton:
-            text: "My Orders"
-            font_name: "assets/fonts/NotoSansKhmer.ttf"
-            pos_hint: {"center_x": 0.5, "center_y": 0.45}
-            size_hint: None, None
-            size: dp(200), dp(48)
-            on_release:
-                app.root.current = "orders_screen"
+                MDIcon:
+                    icon: "account-circle"
+                    halign: "center"
+                    font_size: "64sp"
+                    theme_text_color: "Secondary"
 
-        MDTextButton:
-            text: "[b]Logout[/b]"
-            markup: True
-            font_name: "assets/fonts/NotoSansKhmer.ttf"
-            pos_hint: {"center_x": 0.5, "center_y": 0.3}
-            theme_text_color: "Custom"
-            text_color: app.theme_cls.primary_color
-            on_release:
-                app.logout()
+                MDLabel:
+                    id: user_name
+                    text: "Loading Name..."
+                    halign: "center"
+                    font_style: "H6"
+
+                MDLabel:
+                    id: user_email
+                    text: "Loading Email..."
+                    halign: "center"
+                    font_style: "Caption"
+
+            MDSeparator:
+                height: dp(1)
+
+            MDLabel:
+                text: "Order History"
+                font_style: "Subtitle1"
+                halign: "left"
+                bold: True
+
+            ScrollView:
+                size_hint_y: 0.45
+
+                MDList:
+                    id: order_history
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [0, dp(10)]
+
+                MDRaisedButton:
+                    text: "Order Now"
+                    icon: "shopping"
+                    pos_hint: {"center_x": 0.5}
+                    md_bg_color: app.theme_cls.primary_light
+                    on_release: root.navigate_to_menu()
+
+                MDRaisedButton:
+                    text: "Logout"
+                    icon: "logout"
+                    pos_hint: {"center_x": 0.5}
+                    md_bg_color: [1, 0, 0, 1]
+                    on_release: root.logout()

@@ -31,7 +31,6 @@ class Orders(Screen):
             if orders_data:
                 for order_id, order in orders_data.items():
                     status = order.get("status", "Pending")
-                    # Card colors based on status
                     bg_color = {
                         "Completed": get_color_from_hex("#E8F5E9"),
                         "Cancelled": get_color_from_hex("#FFEBEE"),
@@ -44,7 +43,6 @@ class Orders(Screen):
                         "Pending": get_color_from_hex("#FF8F00")
                     }.get(status, get_color_from_hex("#1565C0"))
 
-                    # Create order card
                     card = MDCard(
                         orientation="vertical",
                         size_hint_y=None,
@@ -56,14 +54,13 @@ class Orders(Screen):
                         spacing=dp(8)
                     )
 
-                    # Header with customer name and status
                     header = MDBoxLayout(
                         orientation="horizontal",
                         adaptive_height=True,
                         spacing=dp(10)
                     )
 
-                    customer_name = order.get('user', 'N/A').split('@')[0]  # Extract name from email
+                    customer_name = order.get('user', 'N/A').split('@')[0]
                     header.add_widget(MDLabel(
                         text=f"{customer_name}'s Order",
                         font_style="H6",
@@ -83,7 +80,6 @@ class Orders(Screen):
                     header.add_widget(status_label)
                     card.add_widget(header)
 
-                    # Order details
                     details = MDBoxLayout(
                         orientation="vertical",
                         adaptive_height=True,
@@ -98,7 +94,6 @@ class Orders(Screen):
                         shorten=True
                     ))
 
-                    # Add timestamp if available
                     if 'timestamp' in order:
                         details.add_widget(MDLabel(
                             text=f"Placed: {order['timestamp']}",
@@ -110,7 +105,6 @@ class Orders(Screen):
 
                     card.add_widget(details)
 
-                    # Action buttons (only for pending orders)
                     if status == "Pending":
                         actions = MDBoxLayout(
                             orientation="horizontal",

@@ -1,4 +1,4 @@
-<MenuScreen>:
+<CartScreen>:
     MDFloatLayout:
         md_bg_color: app.theme_cls.primary_color
 
@@ -12,14 +12,21 @@
             radius: [20, 20, 20, 20]
 
             MDLabel:
-                text: "Menu"
+                text: "Your Cart"
                 font_style: "H5"
                 halign: "center"
                 bold: True
 
             ScrollView:
                 MDList:
-                    id: menu_list
+                    id: cart_list
+
+            MDLabel:
+                id: total_price
+                text: "Total: $0.00"
+                font_style: "H6"
+                halign: "center"
+                bold: True
 
             MDBoxLayout:
                 orientation: "horizontal"
@@ -28,10 +35,10 @@
                 spacing: dp(20)
 
                 MDRaisedButton:
-                    text: "Cart"
-                    icon: "cart"
+                    text: "Clear Cart"
+                    icon: "trash-can"
                     pos_hint: {"center_x": 0.5}
-                    on_release: root.navigate_to_cart()
+                    on_release: root.clear_cart()
 
                 MDRaisedButton:
                     text: "Checkout"
