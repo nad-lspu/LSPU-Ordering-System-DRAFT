@@ -1,8 +1,8 @@
 <LoginScreen>:
     MDBoxLayout:
         orientation: "vertical"
-        spacing: "20dp"
-        padding: "40dp"
+        spacing: "24dp"
+        padding: "32dp"
         pos_hint: {"center_y": 0.5}
         size_hint_y: None
         height: self.minimum_height
@@ -10,71 +10,67 @@
         Image:
             source: "assets/GrabPiyudLong_g.png"
             size_hint: None, None
-            size: "500dp", "180dp"
+            size: "480dp", "160dp"
             allow_stretch: True
             keep_ratio: True
-            pos_hint: {"center_x": 0.5, "top": 0.95}
+            pos_hint: {"center_x": 0.5}
 
         MDTextField:
             id: login_email
-            font_name: "assets/fonts/NotoSansKhmer.ttf"
             hint_text: "Email"
             icon_right: "email"
-            size_hint_x: 0.8
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            size_hint_x: 0.85
             pos_hint: {"center_x": 0.5}
             helper_text_mode: "on_error"
+            height: dp(48)
+            mode: "rectangle"
+
+
+        MDTextField:
+            id: login_password
+            hint_text: "Password"
+            icon_right: "lock"
+            password: True
+            helper_text_mode: "on_error"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            size_hint_x: 0.85
+            pos_hint: {"center_x": 0.5}
+            height: dp(48)
+            mode: "rectangle"
+
+        Widget:
             size_hint_y: None
-            height: "48dp"
+            height: dp(1)
 
         MDBoxLayout:
-            orientation: "vertical"
-            size_hint_x: 0.8
-            size_hint_y: None
-            height: password_container.height + show_password_button.height + dp(5)
+            orientation: "horizontal"
+            size_hint_x: 0.85
+            height: self.minimum_height
             pos_hint: {"center_x": 0.5}
-            spacing: "5dp"
-
-            MDBoxLayout:
-                id: password_container
-                size_hint_y: None
-                height: "48dp"
-
-                MDTextField:
-                    id: login_password
-                    hint_text: "Password"
-                    icon_right: "lock"
-                    password: True
-                    helper_text_mode: "on_error"
-                    size_hint_y: None
-                    height: "48dp"
 
             MDTextButton:
-                id: show_password_button
                 text: "[b]Show Password[/b]" if login_password.password else "[b]Hide Password[/b]"
-                font_name: "assets/fonts/NotoSansKhmer.ttf"
                 markup: True
+                font_name: "assets/fonts/NotoSansKhmer.ttf"
                 halign: "left"
                 theme_text_color: "Custom"
                 text_color: app.theme_cls.primary_color
-                size_hint_y: None
-                height: self.texture_size[1]
                 on_release: root.toggle_password_visibility(login_password)
 
         MDRaisedButton:
             text: "Login"
             font_name: "assets/fonts/NotoSansKhmer.ttf"
             pos_hint: {"center_x": 0.5}
+            size_hint: None, None
+            size: dp(200), dp(48)
             on_release: root.login_user()
-            size_hint_y: None
-            height: "48dp"
 
         MDTextButton:
             text: "Don't have an account? [u]Register here[/u]"
             font_name: "assets/fonts/NotoSansKhmer.ttf"
             markup: True
             pos_hint: {"center_x": 0.5}
-            size_hint_y: None
-            height: self.texture_size[1]
             on_release: app.root.current = "register_screen"
 
         MDTextButton:
@@ -84,6 +80,4 @@
             theme_text_color: "Custom"
             text_color: app.theme_cls.primary_color
             pos_hint: {"center_x": 0.5}
-            size_hint_y: None
-            height: self.texture_size[1]
             on_release: root.forgot_password()

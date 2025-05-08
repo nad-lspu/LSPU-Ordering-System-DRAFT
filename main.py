@@ -35,7 +35,7 @@ class GrabPiyudApp(MDApp):
         sm.add_widget(Orders(name="orders_screen"))
         sm.add_widget(MenuManagement(name="menu_management_screen"))
 
-        # sm.current = "admin_dashboard"
+        sm.current = "user_dashboard"
 
         return sm
 

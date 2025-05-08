@@ -26,10 +26,10 @@ class LoginScreen(Screen):
             uid = user['localId']
             user_data = db.child("users").child(uid).get().val()
 
-            user_info = auth.get_account_info(user['idToken'])
-            if not user_info['users'][0]['emailVerified']:
-                toast("Please verify your email first.")
-                return
+            # user_info = auth.get_account_info(user['idToken'])
+            # if not user_info['users'][0]['emailVerified']:
+            #     toast("Please verify your email first.")
+            #     return
 
             if user_data:
                 role = user_data.get("role")

@@ -5,7 +5,7 @@
         padding: "0dp"
 
         MDTopAppBar:
-            title: "Manage Menu"
+            title: "[font=assets/fonts/Churchward Lorina Bold]Menu Management[/font]"
             elevation: 4
             left_action_items: [["arrow-left", lambda x: setattr(app.root, "current", "admin_dashboard")]]
             md_bg_color: app.theme_cls.primary_color
@@ -28,12 +28,11 @@
                     height: self.texture_size[1] + dp(20)
                     opacity: 0
 
-                GridLayout:
+                MDGridLayout:
                     id: menu_list
-                    size_hint_y: None
-                    height: self.minimum_height
-                    spacing: "10dp"
                     cols: 2
+                    adaptive_height: True
+                    spacing: "10dp"
 
         MDBoxLayout:
             orientation: "horizontal"

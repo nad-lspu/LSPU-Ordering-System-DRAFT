@@ -4,9 +4,8 @@
     MDBoxLayout:
         orientation: "vertical"
 
-        # Admin Panel
         MDTopAppBar:
-            title: "Admin Dashboard"
+            title: "[font=assets/fonts/Churchward Lorina Bold]Admin Dashboard[/font]"
             elevation: 4
             md_bg_color: app.theme_cls.primary_color
             right_action_items: [["logout", lambda x: setattr(app.root, "current", "login_screen")]]
@@ -14,7 +13,6 @@
         MDNavigationLayout:
             MDScreenManager:
                 id: screen_manager
-
 
                 MDScreen:
                     name: "home"
@@ -31,7 +29,6 @@
                             font_name: "assets/fonts/Churchward Lorina Bold.ttf"
                             font_size: "30sp"
 
-                        # Centered GridLayout for Boxes
                         GridLayout:
                             cols: 2
                             spacing: "100dp"
@@ -41,7 +38,6 @@
                             height: self.minimum_height
                             pos_hint: {"center_x": 0.5}
 
-                            # Manage Orders Box
                             MDCard:
                                 orientation: "vertical"
                                 size_hint: None, None
@@ -70,14 +66,14 @@
                                         font_name: "assets/fonts/RigSolid-BoldReverse.ttf"
                                         font_size: "40dp"
 
-                            # Manage Menu Box
+
                             MDCard:
                                 orientation: "vertical"
                                 size_hint: None, None
                                 size: "250dp", "200dp"
                                 radius: [12]
-                                elevation: 2  # Adjust shadow intensity
-                                md_bg_color: get_color_from_hex("#4CAF50")
+                                elevation: 2
+                                md_bg_color: app.theme_cls.primary_light
                                 on_release: app.root.current = "menu_management_screen"
                                 pos_hint: {"center_x": 0.5}
 

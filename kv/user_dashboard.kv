@@ -1,33 +1,40 @@
 <UserDashboard>:
-    MDBoxLayout:
-        orientation: "vertical"
-        spacing: "10dp"
-        padding: "20dp"
+    name: "user_dashboard"
+    MDFloatLayout:
 
         MDLabel:
-            text: "User Dashboard"
+            text: "Welcome, User!"
             halign: "center"
-            theme_text_color: "Secondary"
-            font_style: "H5"
-
-        ScrollView:
-            MDBoxLayout:
-                id: user_orders_layout
-                orientation: "vertical"
-                size_hint_y: None
-                height: self.minimum_height
-                spacing: "10dp"
+            font_style: "H4"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            pos_hint: {"center_x": 0.5, "top": 0.95}
+            size_hint_y: None
+            height: self.texture_size[1]
 
         MDRaisedButton:
-            text: "Logout"
+            text: "Browse Menu"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            pos_hint: {"center_x": 0.5, "center_y": 0.6}
             size_hint: None, None
-            size: "150dp", "50dp"
-            pos_hint: {"center_x": 0.5}
-            on_release: root.logout()
+            size: dp(200), dp(48)
+            on_release:
+                app.root.current = "menu_screen"
 
         MDRaisedButton:
-            text: "Back to Menu"
+            text: "My Orders"
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
             size_hint: None, None
-            size: "150dp", "50dp"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.root.current = "menu_screen"
+            size: dp(200), dp(48)
+            on_release:
+                app.root.current = "orders_screen"
+
+        MDTextButton:
+            text: "[b]Logout[/b]"
+            markup: True
+            font_name: "assets/fonts/NotoSansKhmer.ttf"
+            pos_hint: {"center_x": 0.5, "center_y": 0.3}
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
+            on_release:
+                app.logout()

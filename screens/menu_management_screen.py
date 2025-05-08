@@ -55,6 +55,7 @@ class MenuManagement(Screen):
             hint_text="Price (₱)",
             size_hint_x=1,
             helper_text_mode="on_error",
+            input_filter="float"
         )
 
         delete_button = MDIconButton(
